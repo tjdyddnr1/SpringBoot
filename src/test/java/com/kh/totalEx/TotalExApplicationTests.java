@@ -9,5 +9,4 @@ class TotalExApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -9,5 +9,4 @@ public class TotalExApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TotalExApplication.class, args);
 	}
-
 }
