@@ -5,11 +5,15 @@ import com.kh.totalEx.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Optional<Member> findByEmail(String email); // 개별 회워 정보 조회
+    Optional<Member> findByEmail(String email); // 개별 회원 정보 조회
+    List<Member> findAll();
+
+    Optional<Member> findByEmailAndPwd(String email, String pwd);
 }
 
 // [Junit 테스트에서]
