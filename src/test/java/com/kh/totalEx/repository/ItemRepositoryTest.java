@@ -1,17 +1,22 @@
 package com.kh.totalEx.repository;
 import com.kh.totalEx.constant.ItemSellStatus;
 import com.kh.totalEx.entity.Item;
+import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.diff.DiffAlgorithm;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+
+import javax.xml.crypto.dsig.XMLSignature;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static java.rmi.server.LogStream.log;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Slf4j
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")
 
@@ -63,7 +68,7 @@ class ItemRepositoryTest {
         this.createItemTest();
         List<Item> itemList = itemRepository.findByPriceBetween(10001, 10007);
         for(Item item : itemList) {
-            System.out.println(item.toString());
+            log.info(item.toString());
         }
     }
     @Test
@@ -75,4 +80,21 @@ class ItemRepositoryTest {
             System.out.println(item.toString());
         }
     }
+    @Test
+    @DisplayName("@Query를 이용한 검색 기능 구현")
+    public void findByItemDetailTest() {
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByItemDetail("설명6");
+        for(Item e : itemList) System.out.println(e.toString());
+    }
+    @Test
+    @DisplayName("@Query를 이용한 검색 기능 구현")
+    public void findByItemDetailByNative() {
+        this.createItemTest();
+        List<Item> itemList = itemRepository.findByItemDetailByNative("설명6");
+        for(Item e : itemList) log.info(e.toString());
+    }
+
 }
+
+
