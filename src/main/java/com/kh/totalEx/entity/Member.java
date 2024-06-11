@@ -1,8 +1,7 @@
 package com.kh.totalEx.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.kh.totalEx.constant.Authority;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 
 public class Member {
     @Id
@@ -29,4 +29,18 @@ public class Member {
 
     private String image;
     private LocalDateTime regDate;
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @Builder
+    public Member(String email, String pwd, String name,String image, Authority authority) {
+        this.name = name;
+        this.pwd = pwd;
+        this.email = email;
+        this.image = image;
+        this.authority = authority;
+        this.regDate = LocalDateTime.now();
+    }
+
 }
